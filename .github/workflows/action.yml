@@ -3,25 +3,25 @@ name: Run test using pytest, docker and GitHub actions
 on: [push]
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-        steps:
-        - name: Checkout repo
-          uses: actions/checkout@v4
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
 
-        - name: Set up python
-          uses: actions/setup-python@v4
-          with:
-            python-version: '3.10'
+      - name: Set up python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
 
-        - name: Install dependencies
-          run: |
-            python - pip install --upgrade pip
-            pip install -r requirements.txt
+        # - name: Install dependencies
+        #   run: |
+        #     python - pip install --upgrade pip
+        #     pip install -r requirements.txt
         
-        - name: Build Docker image
-          run: docker build -t pytest-with-docker .
-        
-        - name: Run tests in Docker container
-          run: docker run pytest-with-docker    
+      - name: Build Docker image
+        run: docker build -t pytest-with-docker .
+       
+      - name: Run tests in Docker container
+        run: docker run pytest-with-docker    
